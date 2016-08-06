@@ -23,7 +23,7 @@
 
 	<context:annotation-config />
 	<context:component-scan base-package="ka.gws.barchr.persistence.jpa" />
-	
+
 	<util:properties id="db" location="classpath:persistence.properties" />
 
 	<bean id="MasterDataSource" class="org.apache.commons.dbcp2.BasicDataSource"
@@ -33,9 +33,6 @@
 		<property name="username" value="#{db['Master.username']}" />
 		<property name="password" value="#{db['Master.password']}" />
 
-
-		<!-- <property name="defaultTransactionIsolation"> <util:constant static-field="${Master.pool.defaultTransactionIsolation:java.sql.Connection.TRANSACTION_READ_COMMITTED}" 
-			/> </property> -->
 		<property name="initialSize" value="#{db['Master.pool.initialSize']}" />
 		<property name="maxTotal" value="#{db['Master.pool.maxActive']}" />
 		<property name="maxIdle" value="#{db['Master.pool.maxIdle']}" />

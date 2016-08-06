@@ -66,11 +66,8 @@
 
 	<bean id="searchContextProvider" class="org.apache.cxf.jaxrs.ext.search.SearchContextProvider" />
 
-	<bean id="addDomainFilter" class="ka.gws.barchr.rest.cxf.AddDomainFilter" />
-	<bean id="addETagFilter" class="ka.gws.barchr.rest.cxf.AddETagFilter" />
-	
 	<jaxrs:server id="restContainer" address="/"
-		basePackages="ka.gws.barchr.common.service, ka.gws.barchr.rest.cxf.service"
+		basePackages="ka.gws.barchr.common.rest.api.service, ka.gws.barchr.rest.cxf.service"
 		staticSubresourceResolution="true">
 		<jaxrs:inInterceptors>
 			<ref bean="gzipInInterceptor" />
@@ -80,13 +77,11 @@
 			<ref bean="gzipOutInterceptor" />
 			<ref bean="validationOutInterceptor" />
 		</jaxrs:outInterceptors>
-		
+
 		<jaxrs:providers>
 			<ref bean="jaxbProvider" />
 			<ref bean="jsonProvider" />
 			<ref bean="searchContextProvider" />
-			<ref bean="addDomainFilter" />
-			<ref bean="addETagFilter" />
 		</jaxrs:providers>
 		<jaxrs:extensionMappings>
 			<entry key="json" value="application/json;charset=UTF-8" />

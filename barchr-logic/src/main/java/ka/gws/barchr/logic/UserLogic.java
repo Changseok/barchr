@@ -12,18 +12,18 @@ import ka.gws.barchr.persistence.api.entity.user.User;
 @Component
 public class UserLogic {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(UserLogic.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(UserLogic.class);
 
-	@Autowired
-	private EntityFactory entityFactory;
+  @Autowired
+  private EntityFactory entityFactory;
 
-	@Autowired
-	private UserDAO userDAO;
+  @Autowired
+  private UserDAO userDAO;
 
-	public void createUser(String userName) {
-		User user = entityFactory.newEntity(User.class);
-		user.setName(userName);
-		User createdUser = userDAO.save(user);
-		LOGGER.error("createUser > {}", createdUser);
-	}
+  public void createUser(String userName) {
+    User user = entityFactory.newEntity(User.class);
+    user.setName(userName);
+    User createdUser = userDAO.save(user);
+    LOGGER.error("createUser > {}", createdUser);
+  }
 }

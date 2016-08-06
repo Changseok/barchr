@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ka.gws.barchr.common.service.UserService;
+import ka.gws.barchr.common.rest.api.service.UserService;
 import ka.gws.barchr.logic.UserLogic;
 
 

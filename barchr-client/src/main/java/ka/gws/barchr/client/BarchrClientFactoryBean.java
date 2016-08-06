@@ -1,25 +1,20 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+ * agreements. See the NOTICE file distributed with this work for additional information regarding
+ * copyright ownership. The ASF licenses this file to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance with the License. You may obtain a
+ * copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 package ka.gws.barchr.client;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,228 +32,189 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 
-import ka.gws.barchr.common.service.RESTHeaders;
-
-
 /**
- * Factory bean for creating instances of {@link BarchrClient}.
- * Supports Spring-bean configuration and override via subclassing (see protected methods).
+ * Referenced Apache Syncope Project
+ * 
+ * Factory bean for creating instances of {@link BarchrClient}. Supports Spring-bean configuration
+ * and override via subclassing (see protected methods).
+ * 
+ * @author Changseok Keum
  */
 public class BarchrClientFactoryBean {
 
-    public enum ContentType {
+  public enum ContentType {
 
-        JSON(MediaType.APPLICATION_JSON_TYPE),
-        XML(MediaType.APPLICATION_XML_TYPE);
+    JSON(MediaType.APPLICATION_JSON_TYPE), XML(MediaType.APPLICATION_XML_TYPE);
 
-        private final MediaType mediaType;
+    private final MediaType mediaType;
 
-        ContentType(final MediaType mediaType) {
-            this.mediaType = mediaType;
-        }
-
-        public MediaType getMediaType() {
-            return mediaType;
-        }
-
-        public static ContentType fromString(final String value) {
-            return StringUtils.isNotBlank(value) && value.equalsIgnoreCase(XML.getMediaType().toString())
-                    ? XML
-                    : JSON;
-        }
+    ContentType(final MediaType mediaType) {
+      this.mediaType = mediaType;
     }
 
-    private JacksonJaxbJsonProvider jsonProvider;
-
-    private JAXBElementProvider<?> jaxbProvider;
-
-//    private RestClientExceptionMapper exceptionMapper;
-
-    private String address;
-
-    private ContentType contentType;
-
-    private String domain;
-
-    private boolean useCompression;
-
-    private RestClientFactoryBean restClientFactoryBean;
-
-    protected JacksonJaxbJsonProvider defaultJsonProvider() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JodaModule());
-        objectMapper.configure(com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        return new JacksonJaxbJsonProvider(objectMapper, JacksonJaxbJsonProvider.DEFAULT_ANNOTATIONS);
+    public MediaType getMediaType() {
+      return mediaType;
     }
 
-    @SuppressWarnings({ "rawtypes" })
-    protected JAXBElementProvider<?> defaultJAXBProvider() {
-        JAXBElementProvider<?> defaultJAXBProvider = new JAXBElementProvider();
-
-        DocumentDepthProperties depthProperties = new DocumentDepthProperties();
-        depthProperties.setInnerElementCountThreshold(500);
-        defaultJAXBProvider.setDepthProperties(depthProperties);
-
-        Map<String, Object> marshallerProperties = new HashMap<>();
-        marshallerProperties.put(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        defaultJAXBProvider.setMarshallerProperties(marshallerProperties);
-
-        Map<String, String> collectionWrapperMap = new HashMap<>();
-//        collectionWrapperMap.put(AbstractPolicyTO.class.getName(), "policies");
-        defaultJAXBProvider.setCollectionWrapperMap(collectionWrapperMap);
-
-        return defaultJAXBProvider;
+    public static ContentType fromString(final String value) {
+      return StringUtils.isNotBlank(value) && value.equalsIgnoreCase(XML.getMediaType().toString())
+          ? XML : JSON;
     }
+  }
 
-//    protected RestClientExceptionMapper defaultExceptionMapper() {
-//        return new RestClientExceptionMapper();
-//    }
+  private JacksonJaxbJsonProvider jsonProvider;
 
-    protected RestClientFactoryBean defaultRestClientFactoryBean() {
-        RestClientFactoryBean defaultRestClientFactoryBean = new RestClientFactoryBean();
+  private JAXBElementProvider<?> jaxbProvider;
 
-        if (StringUtils.isBlank(address)) {
-            throw new IllegalArgumentException("Property 'address' is missing");
-        }
-        defaultRestClientFactoryBean.setAddress(address);
+  private String address;
 
-        if (StringUtils.isNotBlank(domain)) {
-            defaultRestClientFactoryBean.setHeaders(Collections.singletonMap(RESTHeaders.DOMAIN, domain));
-        }
+  private ContentType contentType;
 
-        defaultRestClientFactoryBean.setThreadSafe(true);
-        defaultRestClientFactoryBean.setInheritHeaders(true);
+  private String domain;
 
-        List<Feature> features = new ArrayList<>();
-        features.add(new LoggingFeature());
-        defaultRestClientFactoryBean.setFeatures(features);
+  private boolean useCompression;
 
-        List<Object> providers = new ArrayList<>(4);
-//        providers.add(new DateParamConverterProvider());
-        providers.add(getJaxbProvider());
-        providers.add(getJsonProvider());
-//        providers.add(getExceptionMapper());
-        defaultRestClientFactoryBean.setProviders(providers);
+  private RestClientFactoryBean restClientFactoryBean;
 
-        return defaultRestClientFactoryBean;
+  protected JacksonJaxbJsonProvider defaultJsonProvider() {
+    ObjectMapper objectMapper = new ObjectMapper();
+    objectMapper.registerModule(new JodaModule());
+    objectMapper.configure(
+        com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+    return new JacksonJaxbJsonProvider(objectMapper, JacksonJaxbJsonProvider.DEFAULT_ANNOTATIONS);
+  }
+
+  @SuppressWarnings({"rawtypes"})
+  protected JAXBElementProvider<?> defaultJAXBProvider() {
+    JAXBElementProvider<?> defaultJAXBProvider = new JAXBElementProvider();
+
+    DocumentDepthProperties depthProperties = new DocumentDepthProperties();
+    depthProperties.setInnerElementCountThreshold(500);
+    defaultJAXBProvider.setDepthProperties(depthProperties);
+
+    Map<String, Object> marshallerProperties = new HashMap<>();
+    marshallerProperties.put(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+    defaultJAXBProvider.setMarshallerProperties(marshallerProperties);
+
+    Map<String, String> collectionWrapperMap = new HashMap<>();
+    defaultJAXBProvider.setCollectionWrapperMap(collectionWrapperMap);
+
+    return defaultJAXBProvider;
+  }
+
+  protected RestClientFactoryBean defaultRestClientFactoryBean() {
+    RestClientFactoryBean defaultRestClientFactoryBean = new RestClientFactoryBean();
+
+    if (StringUtils.isBlank(address)) {
+      throw new IllegalArgumentException("Property 'address' is missing");
     }
+    defaultRestClientFactoryBean.setAddress(address);
 
-    public JacksonJaxbJsonProvider getJsonProvider() {
-        return jsonProvider == null
-                ? defaultJsonProvider()
-                : jsonProvider;
-    }
+    // ## reference
+    // if (StringUtils.isNotBlank(domain)) {
+    // defaultRestClientFactoryBean.setHeaders(Collections.singletonMap(RESTHeaders.DOMAIN,
+    // domain));
+    // }
 
-    public void setJsonProvider(final JacksonJaxbJsonProvider jsonProvider) {
-        this.jsonProvider = jsonProvider;
-    }
+    defaultRestClientFactoryBean.setThreadSafe(true);
+    defaultRestClientFactoryBean.setInheritHeaders(true);
 
-    public JAXBElementProvider<?> getJaxbProvider() {
-        return jaxbProvider == null
-                ? defaultJAXBProvider()
-                : jaxbProvider;
-    }
+    List<Feature> features = new ArrayList<>();
+    features.add(new LoggingFeature());
+    defaultRestClientFactoryBean.setFeatures(features);
 
-    public BarchrClientFactoryBean setJaxbProvider(final JAXBElementProvider<?> jaxbProvider) {
-        this.jaxbProvider = jaxbProvider;
-        return this;
-    }
+    List<Object> providers = new ArrayList<>(2);
+    // providers.add(new DateParamConverterProvider());
+    providers.add(getJaxbProvider());
+    providers.add(getJsonProvider());
+    // providers.add(getExceptionMapper());
+    defaultRestClientFactoryBean.setProviders(providers);
 
-/*    public RestClientExceptionMapper getExceptionMapper() {
-        return exceptionMapper == null
-                ? defaultExceptionMapper()
-                : exceptionMapper;
-    }
+    return defaultRestClientFactoryBean;
+  }
 
-    public SyncopeClientFactoryBean setExceptionMapper(final RestClientExceptionMapper exceptionMapper) {
-        this.exceptionMapper = exceptionMapper;
-        return this;
-    }*/
+  public JacksonJaxbJsonProvider getJsonProvider() {
+    return jsonProvider == null ? defaultJsonProvider() : jsonProvider;
+  }
 
-    public String getAddress() {
-        return address;
-    }
+  public void setJsonProvider(final JacksonJaxbJsonProvider jsonProvider) {
+    this.jsonProvider = jsonProvider;
+  }
 
-    public BarchrClientFactoryBean setAddress(final String address) {
-        this.address = address;
-        return this;
-    }
+  public JAXBElementProvider<?> getJaxbProvider() {
+    return jaxbProvider == null ? defaultJAXBProvider() : jaxbProvider;
+  }
 
-    public ContentType getContentType() {
-        return contentType == null
-                ? ContentType.JSON
-                : contentType;
-    }
+  public BarchrClientFactoryBean setJaxbProvider(final JAXBElementProvider<?> jaxbProvider) {
+    this.jaxbProvider = jaxbProvider;
+    return this;
+  }
 
-    public BarchrClientFactoryBean setContentType(final ContentType contentType) {
-        this.contentType = contentType;
-        return this;
-    }
+  public String getAddress() {
+    return address;
+  }
 
-    public BarchrClientFactoryBean setContentType(final String contentType) {
-        this.contentType = ContentType.fromString(contentType);
-        return this;
-    }
+  public BarchrClientFactoryBean setAddress(final String address) {
+    this.address = address;
+    return this;
+  }
 
-    public String getDomain() {
-        return domain;
-    }
+  public ContentType getContentType() {
+    return contentType == null ? ContentType.JSON : contentType;
+  }
 
-    public BarchrClientFactoryBean setDomain(final String domain) {
-        this.domain = domain;
-        return this;
-    }
+  public BarchrClientFactoryBean setContentType(final ContentType contentType) {
+    this.contentType = contentType;
+    return this;
+  }
 
-    /**
-     * Sets the given service instance for transparent gzip <tt>Content-Encoding</tt> handling.
-     *
-     * @param useCompression whether transparent gzip <tt>Content-Encoding</tt> handling is to be enabled
-     * @return the current instance
-     */
-    public BarchrClientFactoryBean setUseCompression(final boolean useCompression) {
-        this.useCompression = useCompression;
-        return this;
-    }
+  public BarchrClientFactoryBean setContentType(final String contentType) {
+    this.contentType = ContentType.fromString(contentType);
+    return this;
+  }
 
-    public boolean isUseCompression() {
-        return useCompression;
-    }
+  public String getDomain() {
+    return domain;
+  }
 
-    public RestClientFactoryBean getRestClientFactoryBean() {
-        return restClientFactoryBean == null
-                ? defaultRestClientFactoryBean()
-                : restClientFactoryBean;
-    }
+  public BarchrClientFactoryBean setDomain(final String domain) {
+    this.domain = domain;
+    return this;
+  }
 
-    public BarchrClientFactoryBean setRestClientFactoryBean(final RestClientFactoryBean restClientFactoryBean) {
-        this.restClientFactoryBean = restClientFactoryBean;
-        return this;
-    }
+  /**
+   * Sets the given service instance for transparent gzip <tt>Content-Encoding</tt> handling.
+   *
+   * @param useCompression whether transparent gzip <tt>Content-Encoding</tt> handling is to be
+   *        enabled
+   * @return the current instance
+   */
+  public BarchrClientFactoryBean setUseCompression(final boolean useCompression) {
+    this.useCompression = useCompression;
+    return this;
+  }
 
-    /**
-     * Builds client instance with no authentication, for user self-registration and related queries (schema,
-     * resources, ...).
-     *
-     * @return client instance with no authentication
-     */
-    public BarchrClient create() {
-        return create(null, null);
-    }
+  public boolean isUseCompression() {
+    return useCompression;
+  }
 
-    /**
-     * Builds client instance with the given credentials.
-     *
-     * @param username username
-     * @param password password
-     * @return client instance with the given credentials
-     */
-    public BarchrClient create(final String username, final String password) {
-        return new BarchrClient(
-                getContentType().getMediaType(),
-                getRestClientFactoryBean(),
-//                getExceptionMapper(),
-                username,
-                password,
-                useCompression);
-    }
+  public RestClientFactoryBean getRestClientFactoryBean() {
+    return restClientFactoryBean == null ? defaultRestClientFactoryBean() : restClientFactoryBean;
+  }
+
+  public BarchrClientFactoryBean setRestClientFactoryBean(
+      final RestClientFactoryBean restClientFactoryBean) {
+    this.restClientFactoryBean = restClientFactoryBean;
+    return this;
+  }
+
+  /**
+   * Builds client instance
+   *
+   * @return client instance
+   */
+  public BarchrClient create() {
+    return new BarchrClient(getContentType().getMediaType(), getRestClientFactoryBean(),
+        useCompression);
+  }
 }
