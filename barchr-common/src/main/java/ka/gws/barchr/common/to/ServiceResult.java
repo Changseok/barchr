@@ -8,11 +8,12 @@ public class ServiceResult<A extends AbstractTO> extends AbstractBaseBean {
 
   private A result;
 
-  public A getTO() {
+  public A getResult() {
     return result;
   }
 
-  public void setTO(final A to) {
-    this.result = to;
+  public ServiceResult<A> setResult(final A result) {
+    this.result = result;
+    return this;
   }
 }

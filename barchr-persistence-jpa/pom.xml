@@ -76,12 +76,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>ka.gws.barchr</groupId>
-			<artifactId>barchr-common</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
-		<dependency>
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>9.1-901.jdbc4</version>

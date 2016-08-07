@@ -18,8 +18,12 @@ public class BarchrClientTest {
     clientFactoryBean.setAddress("http://localhost:8080/barchr-rest");
     BarchrClient create = clientFactoryBean.create();
     UserService service = create.getService(UserService.class);
-    Response create2 = service.create("name", true);
-    ServiceResult<UserTO> readEntity = create2.readEntity(ServiceResult.class);
+
+    UserTO userTO = new UserTO();
+    userTO.setUserName("keum");
+    Response response = service.create(userTO);
+    
+    ServiceResult<UserTO> readEntity = response.readEntity(ServiceResult.class);
     System.out.println(readEntity);
   }
 }
