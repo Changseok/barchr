@@ -22,9 +22,4 @@ public class UserTO extends AbstractTO {
   public void setUserPassword(String userPassword) {
     this.userPassword = userPassword;
   }
-
-  @Override
-  public String toString() {
-    return "UserTO [userName=" + userName + ", userPassword=" + userPassword + "]";
-  }
 }

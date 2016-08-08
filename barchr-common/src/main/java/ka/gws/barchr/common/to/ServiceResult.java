@@ -2,18 +2,18 @@ package ka.gws.barchr.common.to;
 
 import ka.gws.barchr.common.AbstractBaseBean;
 
-public class ServiceResult<A extends AbstractTO> extends AbstractBaseBean {
+public class ServiceResult<TO extends AbstractTO> extends AbstractBaseBean {
 
   private static final long serialVersionUID = 2626825062604846635L;
 
-  private A result;
+  private TO to;
 
-  public A getResult() {
-    return result;
+  public TO getTO() {
+    return to;
   }
 
-  public ServiceResult<A> setResult(final A result) {
-    this.result = result;
+  public ServiceResult<TO> setTO(final TO to) {
+    this.to = to;
     return this;
   }
 }

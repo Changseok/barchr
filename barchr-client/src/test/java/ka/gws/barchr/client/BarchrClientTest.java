@@ -1,5 +1,6 @@
 package ka.gws.barchr.client;
 
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 
 import ka.gws.barchr.common.rest.api.service.UserService;
@@ -12,7 +13,6 @@ public class BarchrClientTest {
     new BarchrClientTest().test();
   }
 
-  @SuppressWarnings("unchecked")
   public void test() {
     BarchrClientFactoryBean clientFactoryBean = new BarchrClientFactoryBean();
     clientFactoryBean.setAddress("http://localhost:8080/barchr-rest");
@@ -22,8 +22,8 @@ public class BarchrClientTest {
     UserTO userTO = new UserTO();
     userTO.setUserName("keum");
     Response response = service.create(userTO);
-    
-    ServiceResult<UserTO> readEntity = response.readEntity(ServiceResult.class);
-    System.out.println(readEntity);
+
+    UserTO created = response.readEntity(new GenericType<ServiceResult<UserTO>>() {}).getTO();
+    System.out.println(created);
   }
 }

@@ -16,7 +16,7 @@ public abstract class AbstractDAO<E extends Entity<KEY>, KEY> implements DAO<E, 
 
   protected static final Logger LOG = LoggerFactory.getLogger(AbstractDAO.class);
 
-  @PersistenceContext(unitName = "rmmaster")
+  @PersistenceContext(unitName = "master")
   protected EntityManager entityManager;
 
   @Override

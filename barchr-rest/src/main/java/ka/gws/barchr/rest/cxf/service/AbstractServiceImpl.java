@@ -34,7 +34,7 @@ abstract class AbstractServiceImpl implements JAXRSService {
    * @return
    */
   protected Response createResponse(final ServiceResult<?> result) {
-    String entityId = String.valueOf(result.getResult().getKey());
+    String entityId = String.valueOf(result.getTO().getKey());
     Response.ResponseBuilder builder =
         Response.created(uriInfo.getAbsolutePathBuilder().path(entityId).build());
 
