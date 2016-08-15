@@ -66,9 +66,9 @@
 		</property>
 		<property name="jpaProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
-				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.dialect">#{db['Master.hibernate.dialect']}</prop>
+				<prop key="hibernate.show_sql">#{db['Master.hibernate.show_sql']}</prop>
+				<prop key="hibernate.hbm2ddl.auto">#{db['Master.hibernate.hbm2ddl.auto']}</prop>
 			</props>
 		</property>
 	</bean>
