@@ -22,5 +22,5 @@ import java.io.Serializable;
 
 public interface Entity<KEY> extends Serializable {
 
-    KEY getKey();
+    KEY getId();
 }

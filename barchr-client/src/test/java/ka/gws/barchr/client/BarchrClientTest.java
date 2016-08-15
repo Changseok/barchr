@@ -15,7 +15,7 @@ public class BarchrClientTest {
 
   public void test() {
     BarchrClientFactoryBean clientFactoryBean = new BarchrClientFactoryBean();
-    clientFactoryBean.setAddress("http://localhost:8080/barchr-rest");
+    clientFactoryBean.setAddress("http://localhost:8080/barchr-core");
     BarchrClient create = clientFactoryBean.create();
     UserService service = create.getService(UserService.class);
 

@@ -12,6 +12,8 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
+		<barchr.version>${project.version}</barchr.version>
+
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<targetJdk>1.7</targetJdk>
@@ -35,17 +37,49 @@
 
 		<commons-io.version>2.4</commons-io.version>
 		<commons-codec.version>1.10</commons-codec.version>
+
 		<commons-jexl.version>3.0</commons-jexl.version>
 		<commons-lang.version>3.4</commons-lang.version>
 		<commons-collection.version>4.1</commons-collection.version>
 		<commons-logging.version>1.2</commons-logging.version>
 
 		<junit.version>3.8.1</junit.version>
+
+		<izpack.version>5.0.6</izpack.version>
+		<httpclient.version>4.3.6</httpclient.version>
+		<maven-invoker.version>2.1.1</maven-invoker.version>
 	</properties>
 
 	<dependencyManagement>
 
 		<dependencies>
+
+			<dependency>
+				<groupId>ka.gws.barchr</groupId>
+				<artifactId>barchr-common</artifactId>
+				<version>${barchr.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ka.gws.barchr</groupId>
+				<artifactId>barchr-persistence-api</artifactId>
+				<version>${barchr.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ka.gws.barchr</groupId>
+				<artifactId>barchr-persistence-jpa</artifactId>
+				<version>${barchr.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ka.gws.barchr</groupId>
+				<artifactId>barchr-logic</artifactId>
+				<version>${barchr.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ka.gws.barchr</groupId>
+				<artifactId>barchr-rest</artifactId>
+				<version>${barchr.version}</version>
+			</dependency>
+
 			<dependency>
 				<groupId>javax.validation</groupId>
 				<artifactId>validation-api</artifactId>
@@ -246,6 +280,12 @@
 				<version>${commons-codec.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>${commons-logging.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-jexl3</artifactId>
 				<version>${commons-jexl.version}</version>
@@ -280,8 +320,43 @@
 				</exclusions>
 			</dependency>
 			<!-- /LOG -->
+
+			<!-- INSTALLER -->
+			<dependency>
+				<groupId>org.codehaus.izpack</groupId>
+				<artifactId>izpack-compiler</artifactId>
+				<version>${izpack.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>com.incors</groupId>
+						<artifactId>kunstoff-laf</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.izpack</groupId>
+				<artifactId>izpack-panel</artifactId>
+				<version>${izpack.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.maven.shared</groupId>
+				<artifactId>maven-invoker</artifactId>
+				<version>${maven-invoker.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>${httpclient.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpmime</artifactId>
+				<version>${httpclient.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
 
 	<build>
 		<pluginManagement>
@@ -313,8 +388,40 @@
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.10</version>
+					<configuration>
+						<outputDirectory>${bundles.directory}</outputDirectory>
+						<useBaseVersion>true</useBaseVersion>
+						<!-- <artifactItems> <artifactItem> <groupId>net.tirasa.connid.bundles.soap</groupId> 
+							<artifactId>net.tirasa.connid.bundles.soap</artifactId> <version>${connid.soap.version}</version> 
+							</artifactItem> </artifactItems> -->
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
 					<version>2.6</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.codehaus.izpack</groupId>
+					<artifactId>izpack-maven-plugin</artifactId>
+					<version>${izpack.version}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>xml-maven-plugin</artifactId>
+					<version>1.0.1</version>
+					<dependencies>
+						<dependency>
+							<groupId>xalan</groupId>
+							<artifactId>xalan</artifactId>
+							<version>2.7.2</version>
+						</dependency>
+					</dependencies>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -326,5 +433,6 @@
 		<module>barchr-logic</module>
 		<module>barchr-rest</module>
 		<module>barchr-client</module>
+		<module>barchr-archetype</module>
 	</modules>
 </project>

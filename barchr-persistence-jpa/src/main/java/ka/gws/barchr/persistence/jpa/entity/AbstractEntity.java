@@ -72,7 +72,7 @@ public abstract class AbstractEntity<KEY> implements Entity<KEY> {
 
   @Override
   public String toString() {
-    return new StringBuilder().append(getClass().getSimpleName()).append('[').append(getKey())
+    return new StringBuilder().append(getClass().getSimpleName()).append('[').append(getId())
         .append(']').toString();
   }
 }

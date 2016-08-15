@@ -3,8 +3,11 @@ package ka.gws.barchr.persistence.jpa.entity.user;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import ka.gws.barchr.persistence.api.entity.user.User;
 import ka.gws.barchr.persistence.jpa.entity.AbstractAnnotatedEntity;
@@ -20,13 +23,15 @@ public class JPAUser extends AbstractAnnotatedEntity<Long> implements User {
   public static final String TABLE = "rmk_user_bs";
 
   @Id
+  @GeneratedValue(generator = "increment")
+  @GenericGenerator(name = "increment", strategy = "increment")
   private Long id;
 
-  @Column(nullable = false)
+  @Column(nullable = false, unique = true)
   private String userName;
 
   @Override
-  public Long getKey() {
+  public Long getId() {
     return id;
   }
 
