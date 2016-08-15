@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>ka.gws.barchr</groupId>
+		<artifactId>barchr-fit</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<groupId>ka.gws.barchr.fit</groupId>
+	<artifactId>barchr-fit-core</artifactId>
+	<packaging>war</packaging>
+
+	<name>barchr-fit-core Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<dependencies>
+		<dependency>
+			<groupId>ka.gws.barchr</groupId>
+			<artifactId>barchr-rest</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>barchr-fit-core</finalName>
+
+		<resources>
+			<resource>
+				<directory>../../barchr-logic/src/main/resources</directory>
+				<targetPath>${project.build.directory}/${project.artifactId}/WEB-INF/classes/</targetPath>
+			</resource>
+			<resource>
+				<directory>../../barchr-persistence-jpa/src/main/resources</directory>
+				<excludes>
+					<exclude>context-*.xml</exclude>
+					<exclude>META-INF/persistence.xml</exclude>
+				</excludes>
+				<targetPath>${project.build.directory}/${project.artifactId}/WEB-INF/classes/</targetPath>
+			</resource>
+			<resource>
+				<directory>../../barchr-rest/src/main/resources</directory>
+				<targetPath>${project.build.directory}/${project.artifactId}/WEB-INF/classes/</targetPath>
+			</resource>
+		</resources>
+	</build>
+</project>

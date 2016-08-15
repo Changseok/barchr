@@ -8,14 +8,21 @@
 		<artifactId>barchr</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
+
 	<groupId>ka.gws.barchr</groupId>
 	<artifactId>barchr-persistence-jpa</artifactId>
+
 	<name>barchr-persistence-jpa</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>ka.gws.barchr</groupId>
+			<artifactId>barchr-persistence-api</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>javax.el</groupId>
 			<artifactId>javax.el-api</artifactId>
@@ -67,12 +74,6 @@
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
 			<version>${spring-data-jpa.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>ka.gws.barchr</groupId>
-			<artifactId>barchr-persistence-api</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>

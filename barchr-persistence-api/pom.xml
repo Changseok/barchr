@@ -8,18 +8,17 @@
 		<artifactId>barchr</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
+
 	<groupId>ka.gws.barchr</groupId>
 	<artifactId>barchr-persistence-api</artifactId>
+
 	<name>barchr-persistence-api</name>
 	<url>http://maven.apache.org</url>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>ka.gws.barchr</groupId>
 			<artifactId>barchr-common</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>

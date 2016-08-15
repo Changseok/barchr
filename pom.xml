@@ -432,7 +432,8 @@
 		<module>barchr-persistence-jpa</module>
 		<module>barchr-logic</module>
 		<module>barchr-rest</module>
-		<module>barchr-client</module>
+		<module>barchr-fit</module>
 		<module>barchr-archetype</module>
+		<module>barchr-client</module>
 	</modules>
 </project>

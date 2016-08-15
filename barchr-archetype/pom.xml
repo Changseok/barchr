@@ -15,10 +15,6 @@
 	<name>barchr-archetype</name>
 	<url>http://maven.apache.org</url>
 
-	<properties>
-		<rootpom.basedir>${basedir}/..</rootpom.basedir>
-	</properties>
-
 	<build>
 		<extensions>
 			<extension>
@@ -61,7 +57,11 @@
 				<targetPath>${project.build.outputDirectory}/archetype-resources/barchr-core/src/main/resources</targetPath>
 			</resource>
 			<resource>
-				<directory>../barchr-rest/src/main/webapp/WEB-INF</directory>
+				<directory>../barchr-fit/barchr-fit-core/src/main/resources</directory>
+				<targetPath>${project.build.outputDirectory}/archetype-resources/barchr-core/src/main/resources</targetPath>
+			</resource>
+			<resource>
+				<directory>../barchr-fit/barchr-fit-core/src/main/webapp/WEB-INF</directory>
 				<targetPath>${project.build.outputDirectory}/archetype-resources/barchr-core/src/main/webapp/WEB-INF</targetPath>
 			</resource>
 		</resources>
