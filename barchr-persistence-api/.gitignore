@@ -43,6 +43,7 @@ nbproject
 .buildpath
 .idea
 .project
+.classpath
 .settings
 composer.lock
 /target/
