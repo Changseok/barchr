@@ -13,14 +13,14 @@ public class BarchrClientTest {
     new BarchrClientTest().test();
   }
 
-  public void test() {
+  private void test() {
     BarchrClientFactoryBean clientFactoryBean = new BarchrClientFactoryBean();
-    clientFactoryBean.setAddress("http://localhost:8080/barchr-fit-core");
+    clientFactoryBean.setAddress("http://localhost:8080/barchr");
     BarchrClient create = clientFactoryBean.create();
     UserService service = create.getService(UserService.class);
 
     UserTO userTO = new UserTO();
-    userTO.setUserName("keum");
+    userTO.setUserName("keum111sdsdsf");
     Response response = service.create(userTO);
 
     UserTO created = response.readEntity(new GenericType<ServiceResult<UserTO>>() {}).getTO();
