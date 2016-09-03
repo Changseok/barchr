@@ -18,7 +18,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>ka.gws.barchr</groupId>
-			<artifactId>barchr-common</artifactId>
+			<artifactId>barchr-rest-api</artifactId>
 		</dependency>
 
 		<dependency>

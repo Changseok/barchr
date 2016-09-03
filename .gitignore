@@ -48,3 +48,4 @@ nbproject
 .settings
 composer.lock
 /target/
+barchr-archetype.iml

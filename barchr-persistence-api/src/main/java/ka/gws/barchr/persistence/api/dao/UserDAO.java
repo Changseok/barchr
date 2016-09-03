@@ -1,8 +1,8 @@
 package ka.gws.barchr.persistence.api.dao;
 
-import java.util.List;
-
 import ka.gws.barchr.persistence.api.entity.user.User;
+
+import java.util.List;
 
 
 public interface UserDAO extends DAO<User, Long> {

@@ -10,83 +10,81 @@
 	OF ANY KIND, either express or implied. See the License for the specific 
 	language governing permissions and limitations under the License. -->
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://cxf.apache.org/jaxrs
                            http://cxf.apache.org/schemas/jaxrs.xsd
                            http://www.springframework.org/schema/context
-                           http://www.springframework.org/schema/context/spring-context.xsd
-                           http://www.springframework.org/schema/aop 
-                           http://www.springframework.org/schema/aop/spring-aop.xsd">
+                           http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<import resource="classpath:META-INF/cxf/cxf.xml" />
-	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+    <import resource="classpath:META-INF/cxf/cxf.xml"/>
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
 
-	<context:component-scan base-package="ka.gws.barchr.rest.cxf.service" />
+    <context:component-scan base-package="ka.gws.barchr.rest.cxf.service"/>
 
-	<bean id="jaxbProvider" class="org.apache.cxf.jaxrs.provider.JAXBElementProvider">
-		<property name="namespacePrefixes">
-			<map>
-				<entry key="http://ka.gws.barchr.io">
-					<value>barchr</value>
-				</entry>
-			</map>
-		</property>
-		<property name="depthProperties">
-			<bean id="depthProperties" class="org.apache.cxf.staxutils.DocumentDepthProperties">
-				<property name="innerElementCountThreshold" value="500" />
-			</bean>
-		</property>
-	</bean>
+    <bean id="jaxbProvider" class="org.apache.cxf.jaxrs.provider.JAXBElementProvider">
+        <property name="namespacePrefixes">
+            <map>
+                <entry key="http://ka.gws.barchr.io">
+                    <value>barchr</value>
+                </entry>
+            </map>
+        </property>
+        <property name="depthProperties">
+            <bean id="depthProperties" class="org.apache.cxf.staxutils.DocumentDepthProperties">
+                <property name="innerElementCountThreshold" value="500"/>
+            </bean>
+        </property>
+    </bean>
 
-	<bean id="jacksonObjectMapper" class="ka.gws.barchr.rest.cxf.UnwrappedObjectMapper" />
-	<bean id="jsonProvider"
-		class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider">
-		<property name="mapper" ref="jacksonObjectMapper" />
-	</bean>
+    <bean id="jacksonObjectMapper" class="ka.gws.barchr.rest.cxf.UnwrappedObjectMapper"/>
+    <bean id="jsonProvider"
+          class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider">
+        <property name="mapper" ref="jacksonObjectMapper"/>
+    </bean>
 
-	<bean id="validationProvider" class="org.apache.cxf.validation.BeanValidationProvider" />
-	<bean id="validationInInterceptor"
-		class="org.apache.cxf.jaxrs.validation.JAXRSBeanValidationInInterceptor">
-		<property name="provider" ref="validationProvider" />
-	</bean>
-	<bean id="validationOutInterceptor"
-		class="org.apache.cxf.jaxrs.validation.JAXRSBeanValidationOutInterceptor">
-		<property name="provider" ref="validationProvider" />
-	</bean>
+    <bean id="validationProvider" class="org.apache.cxf.validation.BeanValidationProvider"/>
+    <bean id="validationInInterceptor"
+          class="org.apache.cxf.jaxrs.validation.JAXRSBeanValidationInInterceptor">
+        <property name="provider" ref="validationProvider"/>
+    </bean>
+    <bean id="validationOutInterceptor"
+          class="org.apache.cxf.jaxrs.validation.JAXRSBeanValidationOutInterceptor">
+        <property name="provider" ref="validationProvider"/>
+    </bean>
 
-	<bean id="gzipInInterceptor" class="org.apache.cxf.transport.common.gzip.GZIPInInterceptor" />
-	<bean id="gzipOutInterceptor" class="org.apache.cxf.transport.common.gzip.GZIPOutInterceptor">
-		<property name="threshold" value="0" />
-		<property name="force" value="true" />
-	</bean>
+    <bean id="gzipInInterceptor" class="org.apache.cxf.transport.common.gzip.GZIPInInterceptor"/>
+    <bean id="gzipOutInterceptor" class="org.apache.cxf.transport.common.gzip.GZIPOutInterceptor">
+        <property name="threshold" value="0"/>
+        <property name="force" value="true"/>
+    </bean>
 
-	<bean id="searchContextProvider" class="org.apache.cxf.jaxrs.ext.search.SearchContextProvider" />
+    <bean id="searchContextProvider" class="org.apache.cxf.jaxrs.ext.search.SearchContextProvider"/>
 
-	<jaxrs:server id="restContainer" address="/"
-		basePackages="ka.gws.barchr.common.rest.api.service, ka.gws.barchr.rest.cxf.service"
-		staticSubresourceResolution="true">
-		<jaxrs:inInterceptors>
-			<ref bean="gzipInInterceptor" />
-			<ref bean="validationInInterceptor" />
-		</jaxrs:inInterceptors>
-		<jaxrs:outInterceptors>
-			<ref bean="gzipOutInterceptor" />
-			<ref bean="validationOutInterceptor" />
-		</jaxrs:outInterceptors>
+    <jaxrs:server id="restContainer" address="/"
+                  basePackages="kr.gws.barchr.rest.api.service, ka.gws.barchr.rest.cxf.service"
+                  staticSubresourceResolution="true">
+        <jaxrs:inInterceptors>
+            <ref bean="gzipInInterceptor"/>
+            <ref bean="validationInInterceptor"/>
+        </jaxrs:inInterceptors>
+        <jaxrs:outInterceptors>
+            <ref bean="gzipOutInterceptor"/>
+            <ref bean="validationOutInterceptor"/>
+        </jaxrs:outInterceptors>
 
-		<jaxrs:providers>
-			<ref bean="jaxbProvider" />
-			<ref bean="jsonProvider" />
-			<ref bean="searchContextProvider" />
-		</jaxrs:providers>
-		<jaxrs:extensionMappings>
-			<entry key="json" value="application/json;charset=UTF-8" />
-			<entry key="xml" value="application/xml;charset=UTF-8" />
-		</jaxrs:extensionMappings>
-	</jaxrs:server>
+        <jaxrs:providers>
+            <ref bean="jaxbProvider"/>
+            <ref bean="jsonProvider"/>
+            <ref bean="searchContextProvider"/>
+        </jaxrs:providers>
+        <jaxrs:extensionMappings>
+            <entry key="json" value="application/json;charset=UTF-8"/>
+            <entry key="xml" value="application/xml;charset=UTF-8"/>
+        </jaxrs:extensionMappings>
+    </jaxrs:server>
 
 </beans>
