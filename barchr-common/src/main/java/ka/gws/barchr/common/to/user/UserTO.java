@@ -1,15 +1,16 @@
 package ka.gws.barchr.common.to.user;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.annotation.*;
+
 import ka.gws.barchr.common.to.AbstractTO;
 
 public class UserTO extends AbstractTO {
 
     private static final long serialVersionUID = 101121313941735477L;
 
-    @JsonSerialize private String userName;
+    private String userName;
 
-    @JsonSerialize private String userPassword;
+    private String userPassword;
 
     public String getUserName() {
         return userName;

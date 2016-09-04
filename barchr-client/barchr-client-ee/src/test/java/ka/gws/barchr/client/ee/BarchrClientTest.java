@@ -1,21 +1,16 @@
 package ka.gws.barchr.client.ee;
 
-import ka.gws.barchr.client.ee.BarchrClient;
-import ka.gws.barchr.client.ee.BarchrClientFactoryBean;
 import ka.gws.barchr.common.to.ServiceResult;
 import ka.gws.barchr.common.to.user.UserTO;
 import kr.gws.barchr.rest.api.service.UserService;
 
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.Response;
-
 /**
  * Created by kally on 2016-09-03.
  */
-public class EEClientTest {
+public class BarchrClientTest {
 
     public static void main(String[] args) {
-        new EEClientTest().test();
+        new BarchrClientTest().test();
     }
 
     private void test() {
@@ -25,11 +20,11 @@ public class EEClientTest {
         UserService service = create.getService(UserService.class);
 
         UserTO userTO = new UserTO();
-        userTO.setUserName("sdfdsfsdddfsd");
-        Response response = service.create(userTO);
+        userTO.setUserName("sdfdssd123");
+        ServiceResult<UserTO> response = service.create(userTO);
 
-        UserTO created = response.readEntity(new GenericType<ServiceResult<UserTO>>() {
-        }).getTO();
+        //    UserTO created = response.readEntity(new GenericType<ServiceResult<UserTO>>() {}).getTO();
+        UserTO created = response.getTO();
         System.out.println(created);
     }
 

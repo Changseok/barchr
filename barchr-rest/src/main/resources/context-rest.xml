@@ -40,7 +40,7 @@
         </property>
     </bean>
 
-    <bean id="jacksonObjectMapper" class="ka.gws.barchr.rest.cxf.UnwrappedObjectMapper"/>
+    <bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
     <bean id="jsonProvider"
           class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider">
         <property name="mapper" ref="jacksonObjectMapper"/>
@@ -67,14 +67,14 @@
     <jaxrs:server id="restContainer" address="/"
                   basePackages="kr.gws.barchr.rest.api.service, ka.gws.barchr.rest.cxf.service"
                   staticSubresourceResolution="true">
-        <jaxrs:inInterceptors>
+<!--         <jaxrs:inInterceptors>
             <ref bean="gzipInInterceptor"/>
             <ref bean="validationInInterceptor"/>
         </jaxrs:inInterceptors>
         <jaxrs:outInterceptors>
             <ref bean="gzipOutInterceptor"/>
             <ref bean="validationOutInterceptor"/>
-        </jaxrs:outInterceptors>
+        </jaxrs:outInterceptors> -->
 
         <jaxrs:providers>
             <ref bean="jaxbProvider"/>

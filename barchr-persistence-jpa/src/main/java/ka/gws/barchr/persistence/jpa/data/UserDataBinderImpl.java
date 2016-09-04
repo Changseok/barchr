@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
     @Override public UserTO getUserTO(User user) {
         UserTO userTO = new UserTO();
-        userTO.setKey(user.getId());
         userTO.setUserName(user.getName());
         return userTO;
     }

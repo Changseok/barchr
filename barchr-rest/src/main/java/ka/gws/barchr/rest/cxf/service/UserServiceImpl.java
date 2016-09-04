@@ -14,8 +14,8 @@ import javax.ws.rs.core.Response;
 
     @Autowired private UserLogic userLogic;
 
-    @Override public Response create(UserTO userTO) {
+    @Override public ServiceResult<UserTO> create(UserTO userTO) {
         ServiceResult<UserTO> created = userLogic.createUser(userTO);
-        return createResponse(created);
+        return created;
     }
 }
