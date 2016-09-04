@@ -10,7 +10,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>ka.gws.barchr</groupId>
+    <groupId>ka.gws.barchr.client</groupId>
     <artifactId>barchr-client-ee</artifactId>
 
     <name>barchr-client-ee</name>

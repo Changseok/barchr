@@ -8,6 +8,7 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
+	<groupId>ka.gws.barchr.client</groupId>
 	<artifactId>barchr-client-me</artifactId>
 
 	<dependencies>
@@ -26,15 +27,6 @@
 			<groupId>com.squareup.retrofit2</groupId>
 			<artifactId>converter-jackson</artifactId>
 			<version>2.1.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.fasterxml.jackson.datatype</groupId>
-			<artifactId>jackson-datatype-joda</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.jaxrs</groupId>
-			<artifactId>jackson-jaxrs-json-provider</artifactId>
 		</dependency>
 
 	</dependencies>

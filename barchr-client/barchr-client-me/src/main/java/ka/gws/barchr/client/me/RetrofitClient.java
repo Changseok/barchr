@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.concurrent.Executor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.joda.JodaModule;
 
 import ka.gws.barchr.common.to.AbstractTO;
 import ka.gws.barchr.common.to.ServiceResult;
@@ -84,7 +83,6 @@ public class RetrofitClient {
             builder = builder.baseUrl(baseUrl);
             if (this.objectMapper == null) {
                 this.objectMapper = new ObjectMapper();
-                this.objectMapper.registerModule(new JodaModule());
             }
             builder.addConverterFactory(JacksonConverterFactory.create(objectMapper));
             if (this.callbackExecutor != null) {
