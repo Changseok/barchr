@@ -5,6 +5,8 @@ The structure of this project is originally referenced by Apache Syncope Project
 
 Spring Framework + Apache CXF + JPA(Hibernate) + PostgreSQL
 
+++ Retrofit Client module for android
+
 
 ## Work Planning
 
